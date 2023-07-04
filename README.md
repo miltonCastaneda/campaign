@@ -5,6 +5,15 @@
 Configuración de campaña en las diferentes sucursales de un comercio.
 
 ## Instalación
+Para instalar y ejecutar el proyecto, sigue estos pasos:
+
+- Asegúrate de tener Node.js y npm instalados en tu máquina.
+
+- Clona el repositorio en tu entorno local o descarga el archivo ZIP.
+
+- Abre una terminal y navega hasta el directorio del proyecto.
+
+- Ejecuta el siguiente comando para instalar las dependencias:
 
 ```bash
 $ npm install
@@ -22,16 +31,30 @@ docker-compose up -d
 
 ## Correr API
 
+La API está configurada para ejecutarse en diferentes modos según tus necesidades. A continuación, se detallan los comandos disponibles para iniciar la API:
+
+Modo de desarrollo:
+
 ```bash
 # development
 $ npm run start
+```
+Este comando inicia la API en modo de desarrollo. Será útil cuando estés realizando pruebas y desarrollo localmente.
 
+Modo de observación:
+```bash
 # watch mode
 $ npm run start:dev
 
+```
+Este comando inicia la API en modo de observación. La API se reiniciará automáticamente cada vez que detecte cambios en los archivos. Es especialmente útil durante el desarrollo activo y la depuración.
+
+Modo de producción:
+```bash
 # production mode
 $ npm run start:prod
 ```
+Este comando inicia la API en modo de producción. Se recomienda utilizar este modo al implementar la API en un entorno de producción.
 
 ### Endpoints de la API
 
