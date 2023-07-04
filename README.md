@@ -29,6 +29,10 @@ Ejecuta el siguiente comando para iniciar el contenedor de PostgreSQL:
 docker-compose up -d
 ```
 
+## IMPORTANTE: Para ejecutar este proyecto, se requieren ciertas variables de entorno.
+    Por favor, solicita las variables de entorno y sera entregadas a través del correo electrónico
+    para garantizar un entorno de ejecución correcto y seguro.(.env)
+
 ## Correr API
 
 La API está configurada para ejecutarse en diferentes modos según tus necesidades. A continuación, se detallan los comandos disponibles para iniciar la API:
