@@ -1,72 +1,80 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo_text.svg" width="320" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Descripción
 
-## Description
+Configuración de campaña en las diferentes sucursales de un comercio.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Instalación
+Para instalar y ejecutar el proyecto, sigue estos pasos:
 
-## Installation
+- Asegúrate de tener Node.js y npm instalados en tu máquina.
+
+- Clona el repositorio en tu entorno local o descarga el archivo ZIP.
+
+- Abre una terminal y navega hasta el directorio del proyecto.
+
+- Ejecuta el siguiente comando para instalar las dependencias:
 
 ```bash
 $ npm install
 ```
 
-## Running the app
+## Configure la base de datos
+
+Abre una terminal o línea de comandos y navega hasta la ubicación de tu archivo docker-compose.yml.
+
+Ejecuta el siguiente comando para iniciar el contenedor de PostgreSQL:
+
+```bash
+docker-compose up -d
+```
+
+## Correr API
+
+La API está configurada para ejecutarse en diferentes modos según tus necesidades. A continuación, se detallan los comandos disponibles para iniciar la API:
+
+Modo de desarrollo:
 
 ```bash
 # development
 $ npm run start
+```
+Este comando inicia la API en modo de desarrollo. Será útil cuando estés realizando pruebas y desarrollo localmente.
 
+Modo de observación:
+```bash
 # watch mode
 $ npm run start:dev
 
+```
+Este comando inicia la API en modo de observación. La API se reiniciará automáticamente cada vez que detecte cambios en los archivos. Es especialmente útil durante el desarrollo activo y la depuración.
+
+Modo de producción:
+```bash
 # production mode
 $ npm run start:prod
 ```
+Este comando inicia la API en modo de producción. Se recomienda utilizar este modo al implementar la API en un entorno de producción.
 
-## Test
+### Endpoints de la API
 
-```bash
-# unit tests
-$ npm run test
+A continuación se muestran algunos ejemplos de los endpoints disponibles en la API:
 
-# e2e tests
-$ npm run test:e2e
+Flujo de Ejecución endpoinds
+- `POST-//brands`: Crear comercio o marca.
+- `POST-//branches`: Crear sucursales de un comercio.
+- `POST-//campaign`: Crea campaña de cualquier tipo para un comercio.
+- `POST-//user`: Usuario x que realiza una compra en el comercio.
+- `POST-//cashPoints`: Registrar el valor de una compra en puntos y cashback acumulado para un usuario.
 
-# test coverage
-$ npm run test:cov
-```
+Ademas existen otros para la administración de la api que pueden ser revisados en  el formato swagger ubicado en la raiz del API "http://localhost:3000/"
 
-## Support
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Observaciones Generales
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- El proyecto no esta 100% terminado y estable, por lo que pueden presentarse errores, sin embargo deberia poderse probar un flujo normal de camino feliz.
+- No se completaron pruebas unitarias
+- No se agrego plan de despliegue mas halla de node.
 
 ## License
 
