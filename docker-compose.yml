@@ -9,7 +9,7 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./postgres_data:/data/postgres
+      - ./postgres_data:/var/lib/postgresql
 
   pgadmin:
     image: dpage/pgadmin4
@@ -41,6 +41,3 @@ services:
     depends_on:
       - mysql
 
-volumes:
-  postgres_data: {}
-  mysql_data: {}

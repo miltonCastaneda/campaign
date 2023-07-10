@@ -65,7 +65,7 @@ Flujo de Ejecución endpoinds
 - `POST-//branches`: Crear sucursales de un comercio.
 - `POST-//campaign`: Crea campaña de cualquier tipo para un comercio.
 - `POST-//user`: Usuario x que realiza una compra en el comercio.
-- `POST-//cashPoints`: Registrar el valor de una compra en puntos y cashback acumulado para un usuario.
+- `POST-//campaignUsers`: Registrar el valor de una compra en puntos y cashback acumulado para un usuario.
 
 Ademas existen otros para la administración de la api que pueden ser revisados en  el formato swagger ubicado en la raiz del API "http://localhost:3000/"
 

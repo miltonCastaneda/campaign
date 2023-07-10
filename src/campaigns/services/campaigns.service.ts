@@ -15,15 +15,14 @@ import {
 export class CampaignsService {
   constructor(
     @InjectRepository(Campaign) private campaignRepo: Repository<Campaign>,
-    @InjectRepository(Brand) private brandRepo: Repository<Brand>,
     @InjectRepository(Branch) private branchRepo: Repository<Branch>,
-  ) {}
+  ) { }
 
   findAll(params?: FiltercampaignsDto) {
     if (params) {
       const where: FindOptionsWhere<Campaign> = {};
       const { limit, offset } = params;
-      
+
       where.status = true;
 
       return this.campaignRepo.find({
@@ -39,11 +38,14 @@ export class CampaignsService {
   }
 
   async findOne(id: number) {
-    const campaign = await this.campaignRepo.findOne( {
-      where: { id },
-      relations: ['brand', 'branches'],
+    const campaign = await this.campaignRepo.findOne({
+      where: {
+        id,
+        status: true
+      },
+      relations: ['branch'],
     });
-    
+
     if (!campaign) {
       throw new NotFoundException(`Campaign #${id} not found`);
     }
@@ -56,7 +58,8 @@ export class CampaignsService {
     if (data.branchId) {
       const branch = await this.branchRepo.findOne({
         where: {
-          id: data.branchId
+          id: data.branchId,
+          status: true
         }
       });
       newCampaign.branch = branch;
@@ -66,17 +69,30 @@ export class CampaignsService {
   }
 
   async update(id: number, changes: UpdateCampaignDto) {
-    const campaign = await this.campaignRepo.findOneBy({id});
+    const campaign = await this.campaignRepo.findOneBy({ id });
+
+    if (!campaign) {
+      throw new NotFoundException(`Campaign #${id} not found`);
+    }
+
+
     if (changes.branchId) {
       const branch = await this.branchRepo.findOneBy({ id: changes.branchId });
       campaign.branch = branch;
     }
-    
+
     this.campaignRepo.merge(campaign, changes);
+
     return this.campaignRepo.save(campaign);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const campaign = await this.campaignRepo.findOneBy({ id });
+
+    if (!campaign) {
+      throw new NotFoundException(`Campaign #${id} not found`);
+    }
+
     return this.campaignRepo.delete(id);
   }
 }

@@ -1,28 +1,27 @@
 import {
-  Entity,
   PrimaryGeneratedColumn,
+  Entity,
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
+  ManyToOne,
+  JoinColumn
 } from 'typeorm';
 
-import { Branch } from './branch.entity';
-import { Point } from './point.entity';
 
-@Entity()
-export class Brand {
+import { User } from './user.entity';
+
+
+@Entity('cash_back')
+export class CashBack {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 255, unique: true })
-  name: string;
+  @Column({ name: 'amount', type: 'integer' })
+  amount: number;
 
-  @Column({ type: 'varchar', length: 13 })
-  phone: string;
-
-  @Column({ type: 'varchar', length: 255 })
-  country: string;
+  @Column({ name: 'user_id', type: 'integer' })
+  userId: number;
 
   @CreateDateColumn({
     name: 'create_at',
@@ -41,10 +40,10 @@ export class Brand {
   @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @OneToMany(() => Branch, (branch) => branch.brand)
-  branches: Branch[];
 
-  @OneToMany(() => Point, (point) => point.brand)
-  points: Point[];
+  @ManyToOne(() => User, (user) => user.points)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
 
 }

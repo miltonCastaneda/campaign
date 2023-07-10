@@ -9,19 +9,26 @@ import { CreateBranchDto, UpdateBranchDto } from '../dtos/branch.dtos';
 export class BranchesService {
   constructor(
     @InjectRepository(Branch) private branchRepo: Repository<Branch>,
-  ) {}
+  ) { }
 
   findAll() {
-    return this.branchRepo.find();
+    return this.branchRepo.find({
+      where: {
+        status: true
+      },
+      take: 100
+    });
   }
 
   async findOne(id: number) {
-    const branch = this.branchRepo.findOne({
-      where:{
-        id
+    const branch = await this.branchRepo.findOne({
+      where: {
+        id,
+        status: true
       },
-      relations: ['campaigns'],
+      relations: ['campaigns', 'brand']
     });
+
     if (!branch) {
       throw new NotFoundException(`Branch #${id} not found`);
     }
@@ -35,11 +42,21 @@ export class BranchesService {
 
   async update(id: number, changes: UpdateBranchDto) {
     const branch = await this.findOne(id);
+
+    if (!branch) {
+      throw new NotFoundException(`Branch #${id} not found`);
+    }
+
     this.branchRepo.merge(branch, changes);
     return this.branchRepo.save(branch);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
+    const branch = await this.findOne(id);
+
+    if (!branch) {
+      throw new NotFoundException(`Branch #${id} not found`);
+    }
     return this.branchRepo.delete(id);
   }
 }

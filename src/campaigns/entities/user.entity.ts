@@ -8,7 +8,9 @@ import {
 } from 'typeorm';
 
 
-import { CashPoint } from './cashPoint.entity';
+import { CampaignUser } from './campaignUser.entity';
+import { Point } from './point.entity';
+import { CashBack } from './cashBack.entity';
 
 
 @Entity()
@@ -19,18 +21,18 @@ export class User {
   @Column({ name: 'name', type: 'varchar', length: 255, unique: true })
   userName: string;
 
-  @Column({ name:'first_name', type: 'varchar', length: 255})
+  @Column({ name: 'first_name', type: 'varchar', length: 255 })
   firstName: string;
 
-  @Column({name:'last_name', type: 'varchar', length: 255})
+  @Column({ name: 'last_name', type: 'varchar', length: 255 })
   lastName: string;
 
-  @Column({ type: 'varchar', length: 255, unique: true})
+  @Column({ type: 'varchar', length: 255, unique: true })
   identification: string;
-  
-  @Column({ name:'identification_type', type: 'varchar', length: 255 })
+
+  @Column({ name: 'identification_type', type: 'varchar', length: 255 })
   identificationType: string;
-  
+
 
   @Column({ type: 'varchar', length: 255, unique: true })
   email: string;
@@ -49,11 +51,20 @@ export class User {
   })
   updateAt: Date;
 
-  @Column({ type: 'boolean' })
+  @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @OneToMany(() => CashPoint, (cashPoint) => cashPoint.user )
-  cashPoints: CashPoint[];
+
+  @OneToMany(() => Point, (point) => point.user)
+  points: Point[];
+
+
+  @OneToMany(() => CashBack, (cashBack) => cashBack.user)
+  cashBacks: CashBack[];
+
+
+  @OneToMany(() => CampaignUser, (campaignUser) => campaignUser.user)
+  campaignUsers: CampaignUser[];
 
 
 }

@@ -31,11 +31,6 @@ export class UsersController {
   }
 
 
-  @Get(':identification')
-  getByIdentification(@Param('identification') identification: string) {
-    return this.usersService.getByIdentification(identification);
-  }
-
   @Post()
   create(@Body() payload: CreateUserDto) {
     return this.usersService.create(payload);

@@ -1,18 +1,18 @@
-import { IsString, IsNotEmpty, IsBoolean, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsBoolean, IsOptional, IsEmail, Validate, IsAlpha } from 'class-validator';
 import { PartialType, ApiProperty } from '@nestjs/swagger';
 
 export class CreateUserDto {
-  @IsString()
+  @IsAlpha()
   @IsNotEmpty()
   @ApiProperty()
   readonly userName: string;
 
-  @IsString()
+  @IsAlpha()
   @IsNotEmpty()
   @ApiProperty()
   readonly firstName: string;
-  
-  @IsNumber()
+
+  @IsAlpha()
   @IsNotEmpty()
   @ApiProperty()
   readonly lastName: string;
@@ -24,18 +24,24 @@ export class CreateUserDto {
 
   @IsString()
   @IsNotEmpty()
+  @Validate((x) => {
+    ["CC", "NIT"]
+  }, {
+    message: `You can send just the value "CC" or "NIT"`
+  })
   @ApiProperty()
   readonly identificationType: string;
 
-  @IsString()
+  @IsEmail()
   @IsNotEmpty()
   @ApiProperty()
   readonly email: string;
 
-  @IsNotEmpty()
   @IsBoolean()
+  @ApiProperty()
+  @IsOptional()
   readonly status: boolean;
 
 }
 
-export class UpdateUserDto extends PartialType(CreateUserDto) {}
+export class UpdateUserDto extends PartialType(CreateUserDto) { }

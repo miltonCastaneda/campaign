@@ -18,7 +18,7 @@ import { CreateBranchDto, UpdateBranchDto } from './../dtos/branch.dtos';
 @ApiTags('branches')
 @Controller('branches')
 export class BranchesController {
-  constructor(private branchesService: BranchesService) {}
+  constructor(private branchesService: BranchesService) { }
 
   @Get()
   findAll() {

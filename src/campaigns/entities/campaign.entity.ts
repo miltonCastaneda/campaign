@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 import { Branch } from './branch.entity';
-import { CashPoint } from './cashPoint.entity';
+import { CampaignUser } from './campaignUser.entity';
 
 @Entity({ name: 'campaigns' })
 export class Campaign {
@@ -20,7 +20,7 @@ export class Campaign {
   @Column({ type: 'varchar', length: 255, unique: true })
   name: string;
 
-  @Column({ name:'value_coin', type: 'int' })
+  @Column({ name: 'value_coin', type: 'int' })
   valueCoin: number;
 
   @Column({ name: 'value_point', type: 'int' })
@@ -35,18 +35,14 @@ export class Campaign {
   @Column({ name: 'value_to_redeem_p', type: 'int' })
   valueToRedeemP: number;
 
-  @Column({ name: 'aditional_percentage', type: 'int' })
+  @Column({ name: 'aditional_percentage', type: 'int', default: 0 })
   aditionalPercentage: number;
 
 
-  @Column({ name: 'min_to_aditional_percentaje', type: 'int' })
-  minToaditionalPercentage: number;
+  @Column({ name: 'min_to_aditional_percentaje', type: 'int', default: 0 })
+  minToAditionalPercentage: number;
 
-  
 
-  @Column({ name: 'type', type: 'varchar', length: 1 })
-  type: string;
-//TODO: Pasar a fechas ingresasdas por el usuario
   @CreateDateColumn({
     name: 'start_date',
     type: 'timestamptz'
@@ -74,12 +70,12 @@ export class Campaign {
   })
   updateAt: Date;
 
-  
-  @Column({ type: 'boolean' })
+
+  @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @OneToMany(() => CashPoint, (cashPoint) => cashPoint.campaign )
-  cashPoints: CashPoint[];
+  @OneToMany(() => CampaignUser, (campaignUser) => campaignUser.campaign)
+  campaignUsers: CampaignUser[];
 
 
   @ManyToOne(() => Branch, (branch) => branch.campaigns)

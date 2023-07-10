@@ -1,25 +1,29 @@
-import { IsString,  IsNotEmpty, IsBoolean    } from 'class-validator';
+import { IsNotEmpty, IsBoolean, IsOptional, IsPhoneNumber, IsAlphanumeric, IsAlpha    } from 'class-validator';
 import { PartialType, ApiProperty} from '@nestjs/swagger';
 
 export class CreateBrandDto {
-  @IsString()
+
   @IsNotEmpty()
   @ApiProperty()
+  @IsAlphanumeric()
   readonly name: string;
 
   @IsNotEmpty()
-  @IsString()
   @ApiProperty()
+  @IsPhoneNumber(null,
+  {
+    message: "Put a phone number with country code and its format. Example: +573226253670 in Colombia"
+  })
   readonly phone: string;
 
   @IsNotEmpty()
-  @IsString()
   @ApiProperty()
+  @IsAlpha()
   readonly country: string;
 
-  @IsNotEmpty()
   @IsBoolean()
   @ApiProperty()
+  @IsOptional()
   readonly status: boolean;
 }
 

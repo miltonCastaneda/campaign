@@ -13,19 +13,19 @@ import { Campaign } from './campaign.entity';
 import { User } from './user.entity';
 
 
-@Entity('cash_point_user')
-export class CashPoint {
+@Entity('campaign_user')
+export class CampaignUser {
   @PrimaryGeneratedColumn()
   id: number;
-  
-  @Column({ name: 'value_money', type: 'integer'})
-  valueMoneyAdded: number;
 
-  @Column({ name: 'current_points', type: 'integer'})
-  currentPoints: number;
+  @Column({ name: 'amount', type: 'integer' })
+  amount: number;
 
-  @Column({ name: 'current_cashback', type: 'integer'})
-  currentCashback: number;
+  @Column({ name: 'campaign_id', type: 'integer' })
+  campaignId: number;
+
+  @Column({ name: 'user_id', type: 'integer' })
+  userId: number;
 
   @CreateDateColumn({
     name: 'create_at',
@@ -41,14 +41,14 @@ export class CashPoint {
   })
   updateAt: Date;
 
-  @Column({ type: 'boolean' })
+  @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @ManyToOne(() => Campaign, (campaign) => campaign.cashPoints)
+  @ManyToOne(() => Campaign, (campaign) => campaign.campaignUsers)
   @JoinColumn({ name: 'campaign_id' })
   campaign: Campaign;
 
-  @ManyToOne(() => User, (user) => user.cashPoints)
+  @ManyToOne(() => User, (user) => user.campaignUsers)
   @JoinColumn({ name: 'user_id' })
   user: User;
 

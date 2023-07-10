@@ -22,7 +22,7 @@ import { CampaignsService } from './../services/campaigns.service';
 @ApiTags('campaigns')
 @Controller('campaigns')
 export class CampaignsController {
-  constructor(private campaignsService: CampaignsService) {}
+  constructor(private campaignsService: CampaignsService) { }
 
   @Get()
   @ApiOperation({ summary: 'List of campaigns' })

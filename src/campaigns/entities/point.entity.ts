@@ -4,31 +4,28 @@ import {
   Column,
   CreateDateColumn,
   UpdateDateColumn,
-  OneToMany,
   ManyToOne,
   JoinColumn
 } from 'typeorm';
 
-import { Campaign } from './campaign.entity';
+
+import { User } from './user.entity';
 import { Brand } from './brand.entity';
 
 
-@Entity()
-export class Branch {
+@Entity('point')
+export class Point {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ type: 'varchar', length: 255, unique: true })
-  name: string;
-
-  @Column({ type: 'varchar', length: 255, unique: true })
-  address: string;
+  @Column({ name: 'amount', type: 'integer' })
+  amount: number;
 
   @Column({ name: 'brand_id', type: 'integer' })
   brandId: number;
 
-  @Column({ type: 'varchar', length: 13 })
-  phone: string;
+  @Column({ name: 'user_id', type: 'integer' })
+  userId: number;
 
   @CreateDateColumn({
     name: 'create_at',
@@ -47,12 +44,13 @@ export class Branch {
   @Column({ type: 'boolean', default: true })
   status: boolean;
 
-  @OneToMany(() => Campaign, (campaign) => campaign.branch)
-  campaigns: Campaign[];
-
-  @ManyToOne(() => Brand, (brand) => brand.branches)
+  @ManyToOne(() => Brand, (brand) => brand.points)
   @JoinColumn({ name: 'brand_id' })
-  brand: Brand[];
+  brand: Brand;
+
+  @ManyToOne(() => User, (user) => user.points)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
 
 
 }
